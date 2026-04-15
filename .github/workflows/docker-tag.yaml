@@ -26,11 +26,17 @@ jobs:
       - name: Extract tag name
         run: tagname=${GITHUB_REF#refs/*/} && echo "TAG_NAME=${tagname#v}" >> $GITHUB_ENV
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2 # v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Add metadata
         id: meta
         uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6
         with:
-          images: registry.uniproject.jp/official/unipro-site
+          images: docker.io/rieluinfra/rielu-site
           tags: |
             type=raw,value=latest
             type=semver,pattern={{version}}
@@ -44,8 +50,8 @@ jobs:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=registry.uniproject.jp/official/unipro-site:buildcache
-          cache-to: type=registry,ref=registry.uniproject.jp/official/unipro-site:buildcache,mode=max
+          cache-from: type=registry,ref=docker.io/rieluinfra/rielu-site:buildcache
+          cache-to: type=registry,ref=docker.io/rieluinfra/rielu-site:buildcache,mode=max
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3

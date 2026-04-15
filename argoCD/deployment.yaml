@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/penti-nameko/rielu-site:4.1.8
+          image: docker.io/rieluinfra/rielu-site:4.1.8
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

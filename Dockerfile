@@ -65,6 +65,7 @@ WORKDIR /app
 # Set production environment variables
 ENV NODE_ENV=production
 ENV PORT=3000
+ENV HOST=::
 ENV HOSTNAME="::"
 
 # Next.js collects completely anonymous telemetry data about general usage.

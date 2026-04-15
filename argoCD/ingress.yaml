@@ -19,8 +19,6 @@ spec:
           name: rielu-site
           passHostHeader: true
           port: 3000
-          responseForwarding:
-          
           sticky:
             cookie:
               httpOnly: true

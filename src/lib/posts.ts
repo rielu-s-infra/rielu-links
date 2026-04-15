@@ -2,70 +2,67 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-export type Post = {
+export type PostMeta = {
   slug: string;
   title: string;
-  date: Date;
   description: string;
-  content: string;
-  ogImage?: string;
+  date: string;
 };
 
-export function getAllPosts(): Post[] {
-  const postsDirectory = path.join(process.cwd(), "posts");
-  const filenames = fs.readdirSync(postsDirectory);
+const postsDir = path.join(process.cwd(), "posts");
 
-  return filenames.map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
+function normalizeDescription(description: unknown, content: string): string {
+  if (typeof description === "string" && description.trim().length > 0) {
+    return description.trim();
+  }
 
-    return {
-      slug: filename.replace(".md", ""),
-      title: data.title,
-      date: data.date,
-      description: data.description,
-      content,
-    };
-  });
+  const firstNonEmptyLine = content
+    .split(/\r?\n/)
+    .find((line) => line.trim().length > 0);
+
+  return firstNonEmptyLine ? firstNonEmptyLine.trim() : "";
 }
 
-export function getRecentPosts(limit: number = 5): Post[] {
-  const postsDirectory = path.join(process.cwd(), "posts");
-  const filenames = fs.readdirSync(postsDirectory);
+function normalizeDate(date: unknown): string {
+  if (typeof date === "string" && date.trim().length > 0) {
+    return date.trim();
+  }
 
-  const posts = filenames.map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug: filename.replace(".md", ""),
-      title: data.title,
-      date: data.date,
-      description: data.description,
-      content,
-    };
-  });
-
-  const res = posts
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
-  return res;
+  return "1970-01-01";
 }
 
-export function getPostBySlug(slug: string): Post {
-  const postsDirectory = path.join(process.cwd(), "posts");
-  const filePath = path.join(postsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(fileContents);
+export function getLatestPosts(limit = 3): PostMeta[] {
+  if (!fs.existsSync(postsDir)) {
+    return [];
+  }
 
-  return {
-    slug,
-    title: data.title,
-    date: new Date(data.date),
-    description: data.description,
-    content,
-    ogImage: data.ogImage,
-  };
+  const files = fs
+    .readdirSync(postsDir)
+    .filter((fileName) => fileName.endsWith(".md"))
+    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+
+  const posts = files
+    .map((fileName) => {
+      const filePath = path.join(postsDir, fileName);
+      const raw = fs.readFileSync(filePath, "utf8");
+      const parsed = matter(raw);
+      const title = parsed.data?.title ?? "無題";
+      const description = normalizeDescription(parsed.data?.description, parsed.content);
+      const date = normalizeDate(parsed.data?.date);
+
+      return {
+        slug: fileName.replace(/\.md$/i, ""),
+        title: String(title),
+        description: String(description),
+        date: String(date),
+      };
+    })
+    .filter((post) => post.title.length > 0)
+    .sort((a, b) => {
+      const aTime = new Date(a.date).getTime();
+      const bTime = new Date(b.date).getTime();
+      return bTime - aTime;
+    });
+
+  return posts.slice(0, limit);
 }

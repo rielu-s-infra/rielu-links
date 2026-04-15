@@ -36,5 +36,10 @@ spec:
                 - name: X-k8s-Header
                   value: readiness
           env:
+            
             - name: TZ
               value: Asia/Tokyo
+            - name: HOST
+              value: ::
+            - name: HOSTNAME
+              value: ::

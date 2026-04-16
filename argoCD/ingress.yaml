@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: rielu.uniproject.jp
+    - host: rieluofficial.uniproject.jp
       http:
         paths:
           - path: /

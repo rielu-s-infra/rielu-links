@@ -100,7 +100,7 @@ const styles = {
     fontSize: "0.8rem",
     color: "#aaa",
   } satisfies CSSProperties,
-} as const;
+};
 
 export default function Home(): JSX.Element {
   const [hovered, setHovered] = useState<number | null>(null);

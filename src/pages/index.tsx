@@ -102,7 +102,7 @@ const styles = {
   } satisfies CSSProperties,
 } as const;
 
-export default function Home(): JSX.Element {
+export default function Home() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   const getLinkStyle = (link: LinkItem, index: number): CSSProperties => ({

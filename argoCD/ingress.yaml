@@ -20,7 +20,7 @@ spec:
               service:
                 name: rielu-links
                 port:
-                  number: 3000
+                  number: 3001
   tls:
     - hosts:
         - rieluofficial.uniproject.jp

@@ -5,6 +5,9 @@ metadata:
   namespace: rielu-site
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    # 以下の2行を追加
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: public
   rules:

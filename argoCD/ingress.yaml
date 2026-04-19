@@ -23,5 +23,5 @@ spec:
                   number: 3001
   tls:
     - hosts:
-        - rieluofficial.uniproject.jp
+        - rielulinks.uniproject.jp
       secretName: rielulinks-uniproject-jp-tls

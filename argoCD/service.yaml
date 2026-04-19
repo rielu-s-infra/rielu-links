@@ -7,8 +7,8 @@ spec:
   type: ClusterIP  # ここ（selectorと同じ階層）に配置
   ports:
     - name: http
-      port: 3000
-      targetPort: 3000
+      port: 3001
+      targetPort: 3001
       protocol: TCP
   selector:
     app: rielu-links

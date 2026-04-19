@@ -18,7 +18,7 @@ spec:
           image: docker.io/rieluinfra/rielu-site
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 3001
+            - containerPort: 3000
               name: default-port
           resources:
             requests:

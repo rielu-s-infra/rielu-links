@@ -7,7 +7,7 @@ spec:
   writeBackConfig:
     method: "git"
     gitConfig:
-      repository: "https://github.com/rielu-s-infra/rielu-homepage.git"
+      repository: "https://github.com/rielu-s-infra/rielu-links.git"
       branch: "main"
       writeBackTarget: "helmvalues:./argoCD/values.yaml"
   applicationRefs:

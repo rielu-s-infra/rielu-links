@@ -10,10 +10,18 @@ type LinkItem = {
 const links: LinkItem[] = [
   { href: "https://twitter.com/nameko_simakaze", label: "Twitter (X)" },
   { href: "https://rieluofficial.uniproject.jp", label: "プロフィールサイト", featured: true },
+<<<<<<< HEAD
   { href: "https://qiita.com/rielu", label: "Qiita" },
   { href: "https://rielu-links.uniproject.jp", label: "ランダム数値ジェネレータ", featured: true },
   { href: "https://github.com/penti-nameko", label: "GitHub" },
   { href: "https://uniproject.jp", label: "Uniproject", featured: true },
+=======
+  { href: "https://rielu.uniproject.jp", label: "公式サイト"　},
+  { href: "https://qiita.com/rielu", label: "Qiita" , featured: true },
+  { href: "https://rielugen.uniproject.jp", label: "ランダム数値ジェネレータ"　},
+  { href: "https://github.com/penti-nameko", label: "GitHub" , featured: true },
+  { href: "https://uniproject.jp", label: "Uniproject", },
+>>>>>>> dea6b757aac8724ceb60298b4e9ad54912fa95e3
 ];
 
 const styles = {
@@ -37,7 +45,7 @@ const styles = {
   } satisfies CSSProperties,
 
   profileImg: {
-    width: 200,
+    width: 150,
     height: "auto",
     borderRadius: "50%",
     marginBottom: 16,

@@ -38,7 +38,7 @@ const styles = {
   } satisfies CSSProperties,
 
   profileImg: {
-    width: 200,
+    width: 150,
     height: "auto",
     borderRadius: "50%",
     marginBottom: 16,

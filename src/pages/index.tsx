@@ -11,7 +11,7 @@ const links: LinkItem[] = [
   { href: "https://twitter.com/nameko_simakaze", label: "Twitter (X)" },
   { href: "https://rieluofficial.uniproject.jp", label: "プロフィールサイト", featured: true },
   { href: "https://qiita.com/rielu", label: "Qiita" },
-  { href: "https://rielugen.uniproject.jp", label: "ランダム数値ジェネレータ", featured: true },
+  { href: "https://rielu-links.uniproject.jp", label: "ランダム数値ジェネレータ", featured: true },
   { href: "https://github.com/penti-nameko", label: "GitHub" },
   { href: "https://uniproject.jp", label: "Uniproject", featured: true },
 ];

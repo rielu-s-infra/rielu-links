@@ -1,4 +1,4 @@
-name: rielu-site
+name: rielu-links
 services:
   app:
     build: .
@@ -9,8 +9,8 @@ services:
       DISCORD_GUILD_ID: "YourGuildID"
       DISCORD_TARGET_ROLE_ID: "YourTargetRoleID"
     networks:
-      - rielu-site-network
+      - rielu-links-network
 
 networks:
-  rielu-site-network:
+  rielu-links-network:
     driver: bridge
